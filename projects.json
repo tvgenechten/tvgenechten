@@ -1,0 +1,23 @@
+[
+  {
+    "name": "OnShift",
+    "tagline": "workforce scheduling platform",
+    "stack": ["java", "next.js", "flutter", "supabase"],
+    "count": "all",
+    "meta": "pushed",
+    "repos": [
+      "tvgenechten/OnShift-Back-end-Java",
+      "tvgenechten/OnShift-Front-end-App",
+      "tvgenechten/OnShift-Front-end-Web-Dashboard",
+      "tvgenechten/OnShift-Front-end-Landing-Page-Next-JS"
+    ]
+  },
+  {
+    "name": "Academic Work",
+    "tagline": "thomas more · applied cs, geel",
+    "stack": "auto",
+    "count": "mine",
+    "meta": "since",
+    "ownerMatch": "itfactory-tm"
+  }
+]

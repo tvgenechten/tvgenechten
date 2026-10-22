@@ -1,0 +1,58 @@
+name: Update profile card
+
+on:
+  schedule:
+    # daily, off the hour so it does not queue behind everyone else's midnight jobs
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - render.ts
+      - projects.json
+      - profile.config.json
+      - fonts/**
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-card
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Check data token
+        env:
+          PROFILE_TOKEN: ${{ secrets.PROFILE_TOKEN }}
+        run: |
+          if [ -z "$PROFILE_TOKEN" ]; then
+            echo "::error::PROFILE_TOKEN is missing. Create a classic PAT with 'repo' + 'read:user' scopes and add it as a repository secret — without it the card can only see public data (6 of 4,653 contributions)."
+            exit 1
+          fi
+
+      # render.ts fails closed: on a bad or empty API response it exits non-zero
+      # and leaves the committed SVGs untouched.
+      - name: Render card
+        env:
+          GITHUB_TOKEN: ${{ secrets.PROFILE_TOKEN }}
+        run: node render.ts
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile-card-dark.svg profile-card-light.svg README.md
+          if git diff --staged --quiet; then
+            echo "card unchanged"
+          else
+            git commit -m "chore: refresh profile card [skip ci]"
+            git push
+          fi

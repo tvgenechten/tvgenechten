@@ -1,0 +1,22 @@
+{
+  "name": "Tibo Van Genechten",
+  "role": "software engineer",
+  "location": "Meerhout, Belgium",
+  "site": "tibovangenechten.be",
+  "tagline": "always thinking, always building",
+  "languageWindowMonths": 12,
+  "topLanguages": 6,
+  "activeWithinDays": 14,
+  "excludeLanguages": [
+    "HTML",
+    "CSS",
+    "SCSS",
+    "Less",
+    "Jupyter Notebook",
+    "Hack",
+    "Mako",
+    "Dockerfile",
+    "PLpgSQL",
+    "Procfile"
+  ]
+}
