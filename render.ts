@@ -5,8 +5,9 @@
  * No dependencies: plain TypeScript, executed directly by Node (>= 22.18 / 24).
  *   GITHUB_TOKEN=$(gh auth token) node render.ts
  *
- * The token needs `repo` + `read:user`: 4,647 of the 4,653 contributions this
- * card reports live in private repositories, so unauthenticated data is useless.
+ * The token needs `repo` + `read:user`: nearly every contribution this card
+ * reports happens in a private repository, so unauthenticated data is useless
+ * (public-only sees 6 of 4,653).
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -164,7 +165,10 @@ async function fetchEverything() {
     shared,
     days,
     yearTotal: v.contributionsCollection.contributionCalendar.totalContributions as number,
-    privateTotal: v.contributionsCollection.restrictedContributionsCount as number,
+    // GitHub's own "restricted" bucket: contributions it will not attribute in the
+    // open. Its size swings with both token scope and the profile privacy setting,
+    // so it is logged as a token health signal and never rendered on the card.
+    restrictedTotal: v.contributionsCollection.restrictedContributionsCount as number,
   };
 }
 
@@ -642,7 +646,7 @@ async function main() {
   writeFileSync('./README.md', replaceBlock(readFileSync('./README.md', 'utf-8'), markdownFallback(data)));
   writeFileSync('./preview.html', previewPage(svgs[0].svg, svgs[1].svg));
 
-  console.log(`contributions  ${fmt(data.yearTotal)} past year (${fmt(gh.privateTotal)} private) · ${fmt(data.weekTotal)} this week · ${data.streak}d streak`);
+  console.log(`contributions  ${fmt(data.yearTotal)} past year (${fmt(gh.restrictedTotal)} restricted) · ${fmt(data.weekTotal)} this week · ${data.streak}d streak`);
   for (const p of data.projects) console.log(`project        ${p.name}: ${fmt(p.commits)} commits · ${p.meta}`);
   console.log(`stack          ${data.langs.map((l) => `${l.name} ${l.pct}%`).join(' · ')}`);
   console.log(`wrote          profile-card-dark.svg, profile-card-light.svg, README.md, preview.html`);
