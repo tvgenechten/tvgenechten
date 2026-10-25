@@ -2,8 +2,9 @@ name: Update profile card
 
 on:
   schedule:
-    # daily, off the hour so it does not queue behind everyone else's midnight jobs
-    - cron: "17 4 * * *"
+    # hourly, off the hour so it does not queue behind everyone else's :00 jobs
+    # (Actions minutes are free and unmetered on public repos)
+    - cron: "17 * * * *"
   workflow_dispatch:
   push:
     branches: [main]
