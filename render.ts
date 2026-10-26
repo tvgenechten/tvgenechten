@@ -131,25 +131,78 @@ fragment RepoBits on Repository {
   }
 }`;
 
-async function graphql<T>(query: string, variables: Record<string, unknown> = {}): Promise<T> {
+/** Statuses worth another attempt. 401/403 are about the token and never are. */
+const RETRY_STATUS = new Set([500, 502, 503, 504]);
+const MAX_ATTEMPTS = 4;
+
+/** GitHub's own wording when a query ran out of time on their side. */
+const TRANSIENT_ERROR = /timeout|something went wrong|try again/i;
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/**
+ * One GraphQL request, retried through transient failures.
+ *
+ * GitHub answers 502 often enough under load that a job which gives up on the
+ * first one fails several times a day, and a failed run means the card simply
+ * does not refresh that hour. Timeouts arrive two ways — an HTTP 5xx, or a 200
+ * carrying an errors array — so both paths retry. Anything about the token
+ * (401, 403) or the query itself fails immediately; retrying those would only
+ * turn a clear error into a slow one.
+ */
+async function graphql<T>(query: string, variables: Record<string, unknown> = {}, label = 'query'): Promise<T> {
   const token = process.env.GITHUB_TOKEN;
   if (!token) throw new Error('GITHUB_TOKEN is not set — refusing to render with public-only data.');
 
-  const res = await fetch('https://api.github.com/graphql', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      'User-Agent': 'tvgenechten-profile-card',
-    },
-    body: JSON.stringify({ query, variables }),
-  });
+  let lastError = '';
 
-  if (!res.ok) throw new Error(`GitHub GraphQL failed: ${res.status} ${res.statusText}`);
-  const body = (await res.json()) as { data?: T; errors?: { message: string }[] };
-  if (body.errors?.length) throw new Error(`GitHub GraphQL errors: ${body.errors.map((e) => e.message).join('; ')}`);
-  if (!body.data) throw new Error('GitHub GraphQL returned no data.');
-  return body.data;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    if (attempt > 1) {
+      const backoff = 2 ** (attempt - 1) * 1500; // 3s, 6s, 12s
+      console.warn(`warning: ${label} failed (${lastError}) — retry ${attempt - 1}/${MAX_ATTEMPTS - 1} in ${backoff}ms`);
+      await sleep(backoff);
+    }
+
+    let res: Response;
+    try {
+      res = await fetch('https://api.github.com/graphql', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'User-Agent': 'tvgenechten-profile-card',
+        },
+        body: JSON.stringify({ query, variables }),
+      });
+    } catch (err) {
+      lastError = `network: ${err instanceof Error ? err.message : err}`;
+      continue;
+    }
+
+    if (!res.ok) {
+      lastError = `${res.status} ${res.statusText}`;
+      if (!RETRY_STATUS.has(res.status)) throw new Error(`GitHub GraphQL ${label} failed: ${lastError}`);
+      continue;
+    }
+
+    const body = (await res.json()) as { data?: T; errors?: { message: string }[] };
+
+    if (body.errors?.length) {
+      const messages = body.errors.map((e) => e.message).join('; ');
+      lastError = messages;
+      if (!TRANSIENT_ERROR.test(messages)) throw new Error(`GitHub GraphQL ${label} errors: ${messages}`);
+      continue;
+    }
+
+    if (!body.data) {
+      lastError = 'no data';
+      continue;
+    }
+
+    return body.data;
+  }
+
+  throw new Error(`GitHub GraphQL ${label} failed after ${MAX_ATTEMPTS} attempts: ${lastError}`);
 }
 
 function toRepo(node: any): Repo {
@@ -176,6 +229,8 @@ function toRepo(node: any): Repo {
 async function fetchEverything() {
   const { viewer } = await graphql<{ viewer: { id: string; login: string } }>(
     '{ viewer { id login } }',
+    {},
+    'viewer',
   );
 
   const since = windowStart(config.recentWindowDays);
@@ -204,6 +259,7 @@ async function fetchEverything() {
       }
     }${REPO_BITS}`,
     { vid: viewer.id },
+    'repos and calendar',
   );
 
   const v = data.viewer;
@@ -240,7 +296,11 @@ async function fetchMissing(names: string[], viewerId: string): Promise<Repo[]> 
     const [owner, name] = n.split('/');
     return `r${i}: repository(owner: ${JSON.stringify(owner)}, name: ${JSON.stringify(name)}) { ...RepoBits }`;
   });
-  const data = await graphql<any>(`query($vid: ID!) { ${aliases.join('\n')} }${REPO_BITS}`, { vid: viewerId });
+  const data = await graphql<any>(
+    `query($vid: ID!) { ${aliases.join('\n')} }${REPO_BITS}`,
+    { vid: viewerId },
+    'named repos',
+  );
   return Object.values(data)
     .filter(Boolean)
     .map(toRepo);
@@ -258,12 +318,16 @@ async function fetchMissing(names: string[], viewerId: string): Promise<Repo[]> 
  * feed reports how much moved, never what was written: no commit message and no
  * unnamed private repository ever leaves this request.
  */
+const CHUNK = 10;
+
 async function attachWindowCounts(repos: Repo[], viewerId: string, since: string): Promise<void> {
   const movers = repos.filter((r) => r.pushedAt >= since);
   const byName = new Map(repos.map((r) => [r.nameWithOwner, r]));
 
-  for (let i = 0; i < movers.length; i += 20) {
-    const chunk = movers.slice(i, i + 20);
+  // Ten at a time. A `since:` history traversal has to walk commits, so this is
+  // the expensive query in the run and the one GitHub times out on first.
+  for (let i = 0; i < movers.length; i += CHUNK) {
+    const chunk = movers.slice(i, i + CHUNK);
     const aliases = chunk.map((r, k) => {
       const [owner, name] = r.nameWithOwner.split('/');
       return `r${k}: repository(owner: ${JSON.stringify(owner)}, name: ${JSON.stringify(name)}) {
@@ -278,6 +342,7 @@ async function attachWindowCounts(repos: Repo[], viewerId: string, since: string
     const data = await graphql<any>(
       `query($vid: ID!, $since: GitTimestamp!) { ${aliases.join('\n')} }`,
       { vid: viewerId, since },
+      `window counts ${i / CHUNK + 1}/${Math.ceil(movers.length / CHUNK)}`,
     );
 
     for (const node of Object.values<any>(data)) {
@@ -1155,7 +1220,7 @@ function markdownFallback(d: CardData): string {
 function shipLog(d: CardData): string {
   const counts = d.days.map((x) => x.count);
   // Must survive JSON.stringify byte for byte: a control character would come out
-  // as a   escape and the splice below would silently never match.
+  // as a backslash-u escape and the splice below would silently never match.
   const SENTINEL = '__SHIPLOG_COUNTS__';
 
   const log = {
