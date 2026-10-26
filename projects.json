@@ -3,7 +3,12 @@
     "id": "onshift",
     "name": "OnShift",
     "tagline": "workforce scheduling platform",
-    "stack": ["java", "next.js", "flutter", "supabase"],
+    "stack": [
+      "java",
+      "next.js",
+      "react native expo",
+      "react"
+    ],
     "count": "all",
     "meta": "pushed",
     "repos": [
