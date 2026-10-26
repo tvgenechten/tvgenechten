@@ -7,16 +7,7 @@
   "languageWindowMonths": 12,
   "topLanguages": 6,
   "activeWithinDays": 14,
-  "excludeLanguages": [
-    "HTML",
-    "CSS",
-    "SCSS",
-    "Less",
-    "Jupyter Notebook",
-    "Hack",
-    "Mako",
-    "Dockerfile",
-    "PLpgSQL",
-    "Procfile"
-  ]
+  "recentCount": 5,
+  "recentWindowDays": 14,
+  "excludeLanguages": ["HTML", "CSS", "SCSS", "Less", "Jupyter Notebook", "Hack", "Mako", "Dockerfile", "PLpgSQL", "Procfile"]
 }

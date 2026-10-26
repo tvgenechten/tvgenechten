@@ -1,5 +1,6 @@
 [
   {
+    "id": "onshift",
     "name": "OnShift",
     "tagline": "workforce scheduling platform",
     "stack": ["java", "next.js", "flutter", "supabase"],
@@ -13,6 +14,7 @@
     ]
   },
   {
+    "id": "academic",
     "name": "Academic Work",
     "tagline": "thomas more · applied cs, geel",
     "stack": "auto",

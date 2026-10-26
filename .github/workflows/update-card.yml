@@ -50,7 +50,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add profile-card-dark.svg profile-card-light.svg README.md
+          git add profile-card-dark.svg profile-card-light.svg ship-log.json README.md
           if git diff --staged --quiet; then
             echo "card unchanged"
           else
