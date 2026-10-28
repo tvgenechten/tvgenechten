@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedOn": "2026-10-27",
+  "generatedOn": "2026-10-28",
   "login": "tvgenechten",
   "contributions": {
     "pastYear": 4852,
@@ -88,6 +88,14 @@
   },
   "recent": [
     {
+      "kind": "public",
+      "id": null,
+      "repo": "tvgenechten/tvgenechten",
+      "repoCount": 1,
+      "commits": 6,
+      "pushedAt": "2026-10-27T23:45:15Z"
+    },
+    {
       "kind": "project",
       "id": "academic",
       "repo": null,
@@ -96,19 +104,11 @@
       "pushedAt": "2026-10-27T20:32:18Z"
     },
     {
-      "kind": "public",
-      "id": null,
-      "repo": "tvgenechten/tvgenechten",
-      "repoCount": 1,
-      "commits": 6,
-      "pushedAt": "2026-10-27T20:04:26Z"
-    },
-    {
       "kind": "project",
       "id": "onshift",
       "repo": null,
       "repoCount": 4,
-      "commits": 153,
+      "commits": 134,
       "pushedAt": "2026-10-27T16:16:58Z"
     },
     {
