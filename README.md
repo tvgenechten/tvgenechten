@@ -28,7 +28,7 @@
 
 | project | commits | repos | stack | activity |
 | --- | --: | --: | --- | --- |
-| OnShift | 1,747 | 4 | java · next.js · react native expo · react | pushed 4 hours ago |
+| OnShift | 1,747 | 4 | java · next.js · react native expo · react | pushed 11 hours ago |
 | Academic Work | 1,667 | 7 | php · blade · c# · typescript | since sep 2024 |
 
 **Languages** (last 12 months): TypeScript 48% · Java 27% · Blade 13% · PHP 5% · C# 2% · Dart 2%
@@ -39,10 +39,10 @@
 
 | project | commits | pushed |
 | --- | --: | --- |
-| OnShift | 112 | 4 hours ago |
-| tvgenechten | 6 | 4 hours ago |
-| Academic Work | 128 | 6 hours ago |
-| private work (47 repos) | 2 | 4 days ago |
+| tvgenechten | 6 | 7 hours ago |
+| OnShift | 112 | 11 hours ago |
+| Academic Work | 128 | 13 hours ago |
+| private work (47 repos) | 2 | 5 days ago |
 
 <sub>Regenerated daily by <a href="./render.ts">render.ts</a> — last run 2026-11-02. The same numbers as data: <a href="./ship-log.json">ship-log.json</a>.</sub>
 
