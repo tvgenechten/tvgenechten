@@ -39,12 +39,12 @@
 
 | project | commits | pushed |
 | --- | --: | --- |
-| Academic Work | 198 | 25 minutes ago |
-| tvgenechten | 6 | 5 hours ago |
-| private work (48 repos) | 15 | 1 day ago |
-| OnShift | 93 | 2 days ago |
+| tvgenechten | 6 | 4 hours ago |
+| Academic Work | 194 | 4 hours ago |
+| private work (48 repos) | 15 | 2 days ago |
+| OnShift | 90 | 2 days ago |
 
-<sub>Regenerated daily by <a href="./render.ts">render.ts</a> — last run 2026-11-03. The same numbers as data: <a href="./ship-log.json">ship-log.json</a>.</sub>
+<sub>Regenerated daily by <a href="./render.ts">render.ts</a> — last run 2026-11-04. The same numbers as data: <a href="./ship-log.json">ship-log.json</a>.</sub>
 
 <!-- stats:end -->
 
