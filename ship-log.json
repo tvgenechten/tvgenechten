@@ -88,20 +88,20 @@
   },
   "recent": [
     {
+      "kind": "public",
+      "id": null,
+      "repo": "tvgenechten/tvgenechten",
+      "repoCount": 1,
+      "commits": 4,
+      "pushedAt": "2026-11-07T12:55:13Z"
+    },
+    {
       "kind": "project",
       "id": "academic",
       "repo": null,
       "repoCount": 7,
       "commits": 315,
       "pushedAt": "2026-11-07T12:05:30Z"
-    },
-    {
-      "kind": "public",
-      "id": null,
-      "repo": "tvgenechten/tvgenechten",
-      "repoCount": 1,
-      "commits": 4,
-      "pushedAt": "2026-11-07T05:53:34Z"
     },
     {
       "kind": "project",
