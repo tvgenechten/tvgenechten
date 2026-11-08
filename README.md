@@ -39,8 +39,8 @@
 
 | project | commits | pushed |
 | --- | --: | --- |
-| Academic Work | 326 | 2 hours ago |
-| tvgenechten | 4 | 4 hours ago |
+| tvgenechten | 4 | 8 hours ago |
+| Academic Work | 326 | 10 hours ago |
 | OnShift | 44 | 1 day ago |
 | private work (48 repos) | 15 | 6 days ago |
 
