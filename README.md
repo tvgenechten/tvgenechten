@@ -24,22 +24,22 @@
 
 <!-- stats:start -->
 
-**5,957** contributions in the past year · **456** this week · **97-day** current streak
+**6,006** contributions in the past year · **505** this week · **97-day** current streak
 
 | project | commits | repos | stack | activity |
 | --- | --: | --: | --- | --- |
 | OnShift | 1,751 | 4 | java · next.js · react native expo · react | pushed 8 days ago |
-| Academic Work | 2,157 | 8 | c# · typescript · php · blade | since sep 2024 |
+| Academic Work | 2,176 | 8 | c# · typescript · php · blade | since sep 2024 |
 
 **Languages** (last 12 months): TypeScript 46% · Java 26% · Blade 12% · C# 6% · PHP 5% · Dart 2%
 
-**Contributions** (2025-11-16 → 2026-11-16): 248 active days of 366 · longest streak **97 days** · busiest week **470** · busiest day **142** · **66** repositories touched · building since sep 2024
+**Contributions** (2025-11-16 → 2026-11-16): 248 active days of 366 · longest streak **97 days** · busiest week **468** · busiest day **142** · **66** repositories touched · building since sep 2024
 
 **Pushed in the last 14 days**
 
 | project | commits | pushed |
 | --- | --: | --- |
-| Academic Work | 483 | 7 minutes ago |
+| Academic Work | 502 | 28 minutes ago |
 | OnShift | 4 | 8 days ago |
 | private work (48 repos) | 13 | 2 weeks ago |
 
