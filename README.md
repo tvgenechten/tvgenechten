@@ -24,26 +24,25 @@
 
 <!-- stats:start -->
 
-**6,006** contributions in the past year · **505** this week · **97-day** current streak
+**6,024** contributions in the past year · **502** this week · **98-day** current streak
 
 | project | commits | repos | stack | activity |
 | --- | --: | --: | --- | --- |
-| OnShift | 1,751 | 4 | java · next.js · react native expo · react | pushed 8 days ago |
-| Academic Work | 2,176 | 8 | c# · typescript · php · blade | since sep 2024 |
+| OnShift | 1,751 | 4 | java · next.js · react native expo · react | pushed 9 days ago |
+| Academic Work | 2,180 | 8 | c# · typescript · php · blade | since sep 2024 |
 
 **Languages** (last 12 months): TypeScript 46% · Java 26% · Blade 12% · C# 6% · PHP 5% · Dart 2%
 
-**Contributions** (2025-11-16 → 2026-11-16): 248 active days of 366 · longest streak **97 days** · busiest week **468** · busiest day **142** · **66** repositories touched · building since sep 2024
+**Contributions** (2025-11-16 → 2026-11-17): 249 active days of 367 · longest streak **98 days** · busiest week **468** · busiest day **142** · **66** repositories touched · building since sep 2024
 
 **Pushed in the last 14 days**
 
 | project | commits | pushed |
 | --- | --: | --- |
-| Academic Work | 502 | 28 minutes ago |
-| OnShift | 4 | 8 days ago |
-| private work (48 repos) | 13 | 2 weeks ago |
+| Academic Work | 501 | 36 minutes ago |
+| OnShift | 4 | 9 days ago |
 
-<sub>Regenerated daily by <a href="./render.ts">render.ts</a> — last run 2026-11-16. The same numbers as data: <a href="./ship-log.json">ship-log.json</a>.</sub>
+<sub>Regenerated daily by <a href="./render.ts">render.ts</a> — last run 2026-11-17. The same numbers as data: <a href="./ship-log.json">ship-log.json</a>.</sub>
 
 <!-- stats:end -->
 
