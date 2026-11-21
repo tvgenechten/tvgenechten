@@ -24,7 +24,7 @@
 
 <!-- stats:start -->
 
-**6,300** contributions in the past year · **478** this week · **102-day** current streak
+**6,340** contributions in the past year · **393** this week · **102-day** current streak
 
 | project | commits | repos | stack | activity |
 | --- | --: | --: | --- | --- |
@@ -33,14 +33,14 @@
 
 **Languages** (last 12 months): TypeScript 47% · Java 25% · Blade 12% · C# 6% · PHP 5% · Dart 2%
 
-**Contributions** (2025-11-16 → 2026-11-21): 253 active days of 371 · longest streak **102 days** · busiest week **469** · busiest day **142** · **68** repositories touched · building since sep 2024
+**Contributions** (2025-11-23 → 2026-11-22): 253 active days of 365 · longest streak **102 days** · busiest week **469** · busiest day **142** · **68** repositories touched · building since sep 2024
 
 **Pushed in the last 14 days**
 
 | project | commits | pushed |
 | --- | --: | --- |
-| Academic Work | 455 | 4 hours ago |
-| private work (49 repos) | 1 | 21 hours ago |
+| Academic Work | 455 | 5 hours ago |
+| private work (49 repos) | 1 | 1 day ago |
 | open-playroom | 2 | 2 days ago |
 
 <sub>Regenerated daily by <a href="./render.ts">render.ts</a> — last run 2026-11-21. The same numbers as data: <a href="./ship-log.json">ship-log.json</a>.</sub>
