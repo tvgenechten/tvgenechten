@@ -24,7 +24,7 @@
 
 <!-- stats:start -->
 
-**6,374** contributions in the past year · **427** this week · **103-day** current streak
+**6,377** contributions in the past year · **430** this week · **103-day** current streak
 
 | project | commits | repos | stack | activity |
 | --- | --: | --: | --- | --- |
@@ -39,8 +39,8 @@
 
 | project | commits | pushed |
 | --- | --: | --- |
-| Academic Work | 421 | 1 hour ago |
-| private work (49 repos) | 1 | 1 day ago |
+| Academic Work | 421 | 2 minutes ago |
+| private work (49 repos) | 1 | 2 days ago |
 | open-playroom | 2 | 3 days ago |
 
 <sub>Regenerated daily by <a href="./render.ts">render.ts</a> — last run 2026-11-22. The same numbers as data: <a href="./ship-log.json">ship-log.json</a>.</sub>
