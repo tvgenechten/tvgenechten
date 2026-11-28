@@ -39,11 +39,11 @@
 
 | project | commits | pushed |
 | --- | --: | --- |
-| Academic Work | 434 | 3 minutes ago |
-| private work (49 repos) | 1 | 13 hours ago |
-| open-playroom | 2 | 8 days ago |
+| Academic Work | 352 | 5 hours ago |
+| private work (49 repos) | 1 | 22 hours ago |
+| open-playroom | 2 | 9 days ago |
 
-<sub>Regenerated daily by <a href="./render.ts">render.ts</a> — last run 2026-11-27. The same numbers as data: <a href="./ship-log.json">ship-log.json</a>.</sub>
+<sub>Regenerated daily by <a href="./render.ts">render.ts</a> — last run 2026-11-28. The same numbers as data: <a href="./ship-log.json">ship-log.json</a>.</sub>
 
 <!-- stats:end -->
 
